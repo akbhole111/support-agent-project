@@ -1,5 +1,8 @@
 import streamlit as st
 import sys, os
+import threading
+import uvicorn
+
 sys.path.append(os.path.join(os.path.dirname(__file__), "agent"))
 from graph import app as agent_app
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
@@ -10,9 +13,6 @@ warnings.filterwarnings("ignore")
 logging.getLogger("streamlit.watcher.local_sources_watcher").setLevel(logging.ERROR)
 
 st.set_page_config(page_title="Customer Support Agent", page_icon="🤖", layout="centered")
-
-import threading
-import uvicorn
 
 def run_api_server():
     from tools.api_server import app as fastapi_app
