@@ -1,0 +1,101 @@
+[
+  {
+    "id": "T1_order_lookup_basic",
+    "passed": true,
+    "expected_tool": "get_order_status",
+    "actual_tools_called": [
+      "get_order_status"
+    ],
+    "final_answer": "Your order **2c75c33f103e365438cc19a05d444b7f** was purchased on **March\u202f4,\u202f2017** and is currently **shipped**.  \nThe estimated delivery date is **March\u202f29,\u202f2017**. If you need any further assistance, just let me know!",
+    "notes": "Basic single-turn order lookup"
+  },
+  {
+    "id": "T2_order_missing_id",
+    "passed": true,
+    "expected_tool": null,
+    "actual_tools_called": [],
+    "final_answer": "Sure! Could you please provide your order ID so I can check the status for you?",
+    "notes": "Agent should ask for order ID rather than guessing or hallucinating one"
+  },
+  {
+    "id": "T3_policy_question_refund",
+    "passed": true,
+    "expected_tool": "search_knowledge_base",
+    "actual_tools_called": [
+      "search_knowledge_base"
+    ],
+    "final_answer": "Sure! To request a refund, just follow these steps:\n\n1. **Gather your details** \u2013 Have your order number handy, along with any order confirmation or receipt.\n2. **Contact our support team** \u2013  \n   *\u202fEmail us at support@yourstore.com  \n   *\u202fOr use the chat widget on our website.  \n   *\u202fYou can also call us at 1\u2011800\u2011123\u20114567 (Mon\u2011Fri, 9\u202fa.m.\u20115\u202fp.m. EST).\n3. **Explain the reason** \u2013 Let the agent know why you\u2019re requesting a refund (e.g., wrong item, damaged product, not satisfied, etc.).\n4. **Provide any evidence** \u2013 If you have photos, screenshots, or other documentation, attach them to your message or bring them up during the call.\n5. **Follow the agent\u2019s instructions** \u2013 They\u2019ll guide you through the return shipping (if needed) and confirm when the refund will be processed.\n\nIf you\u2019d like to review our full refund policy, you can find it in the \u201cPolicies\u201d section of our website or let the support agent walk you through it.  \n\nLet me know if you need help locating your order number or anything else!",
+    "notes": "General policy question, well-covered intent"
+  },
+  {
+    "id": "T4_policy_question_thin_coverage",
+    "passed": true,
+    "expected_tool": "search_knowledge_base",
+    "actual_tools_called": [
+      "search_knowledge_base"
+    ],
+    "final_answer": "To cancel a subscription, follow these steps:\n\n1. **Log in** to your account on our website or app.  \n2. Go to **Account Settings** (or \u201cMy Subscriptions\u201d).  \n3. Find the subscription you want to cancel.  \n4. Click the **Cancel** or **Manage** button next to it.  \n5. Confirm the cancellation when prompted.  \n\nIf you don\u2019t see the option or run into any trouble, let us know and we\u2019ll help you through the process.",
+    "notes": "Known thin-coverage intent \u2014 check if retrieved category matches 'subscription' vs 'order'"
+  },
+  {
+    "id": "T5_multiturn_context_retention",
+    "passed": true,
+    "expected_tool": "get_order_status",
+    "actual_tools_called": [
+      "get_order_status",
+      "search_knowledge_base"
+    ],
+    "final_answer": "Your order was canceled before payment was completed, so no refund is required. If you have any other questions or need further assistance, just let me know!",
+    "notes": "Order was canceled \u2014 agent may re-check order status or reason from prior context; either is acceptable"
+  },
+  {
+    "id": "T6_escalation_explicit",
+    "passed": true,
+    "expected_tool": "create_support_ticket",
+    "actual_tools_called": [
+      "create_support_ticket"
+    ],
+    "final_answer": "I\u2019ve created a support ticket for you (Ticket ID: **d5cec324**). A member of our team will reach out shortly to help resolve your issue. Thank you for your patience!",
+    "notes": "Explicit escalation request with no prior context"
+  },
+  {
+    "id": "T7_escalation_after_failed_help",
+    "passed": true,
+    "expected_tool": "create_support_ticket",
+    "actual_tools_called": [
+      "search_knowledge_base",
+      "create_support_ticket"
+    ],
+    "final_answer": "I\u2019ve created a support ticket for you (Ticket ID: **b0d46c63**). A member of our team will reach out shortly to help you cancel your subscription. If you need anything else in the meantime, just let me know!",
+    "notes": "Escalation after knowledge base failed to help \u2014 tests whether agent recognizes failure"
+  },
+  {
+    "id": "T8_invalid_order_id",
+    "passed": true,
+    "expected_tool": "get_order_status",
+    "actual_tools_called": [
+      "get_order_status"
+    ],
+    "final_answer": "I\u2019m sorry, but I couldn\u2019t find any record for the order ID **XXXX999INVALID**.  \nPlease double\u2011check the number you entered and let me know if there\u2019s a different ID you\u2019d like me to look up.",
+    "notes": "Should call the tool, get a 'not found', and communicate that clearly rather than making up a status"
+  },
+  {
+    "id": "T9_ambiguous_request",
+    "passed": true,
+    "expected_tool": null,
+    "actual_tools_called": [],
+    "final_answer": "I\u2019m sorry to hear that! Could you please share the order ID so I can look into what\u2019s going on?",
+    "notes": "Too vague \u2014 agent should ask a clarifying question, not guess a tool"
+  },
+  {
+    "id": "T10_context_switch",
+    "passed": true,
+    "expected_tool": "search_knowledge_base",
+    "actual_tools_called": [
+      "get_order_status",
+      "search_knowledge_base"
+    ],
+    "final_answer": "You can change your shipping address in a couple of easy ways:\n\n1. **Log in to your account**  \n   \u2022 Go to the \u201cShipping Address\u201d section (usually under \u201cAccount Settings\u201d or \u201cMy Orders\u201d).  \n   \u2022 Edit the address fields and click **Save**.\n\n2. **Contact us**  \n   \u2022 If you\u2019d rather have someone update it for you, just let us know the new address and we\u2019ll take care of it.\n\nLet me know if you\u2019d like me to walk you through the steps or if you need anything else!",
+    "notes": "Tests whether agent correctly switches topics rather than getting stuck on the earlier order"
+  }
+]

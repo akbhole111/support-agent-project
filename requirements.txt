@@ -1,0 +1,13 @@
+streamlit
+langgraph
+langchain
+langchain-community
+langchain-groq
+langchain-ollama
+fastapi
+uvicorn
+chromadb
+sentence-transformers
+datasets
+pandas
+requests
