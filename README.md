@@ -24,7 +24,7 @@ It decides which tool to use (or whether to ask a clarifying question instead) b
 User message
      │
      ▼
-┌─────────────┐      ┌──────────────────────┐
+┌──────────────┐      ┌──────────────────────┐
 │  LangGraph   │◄────►│  LLM (reasoning)     │
 │  agent loop  │      │  qwen2.5:3b (local)  │
 │              │      │  gpt-oss-20b (Groq)  │
@@ -32,12 +32,12 @@ User message
        │
        ▼ (tool calls)
 ┌──────────────┬─────────────────┬──────────────────┐
-│ get_order_   │ search_         │ create_support_   │
-│ status       │ knowledge_base  │ ticket             │
-│              │                 │                    │
-│ FastAPI mock │ ChromaDB +      │ FastAPI mock       │
-│ backend      │ sentence-       │ backend            │
-│              │ transformers    │                    │
+│ get_order_   │ search_         │ create_support_  │
+│ status       │ knowledge_base  │ ticket           │
+│              │                 │                  │
+│ FastAPI mock │ ChromaDB +      │ FastAPI mock     │
+│ backend      │ sentence-       │ backend          │
+│              │ transformers    │                  │
 └──────────────┴─────────────────┴──────────────────┘
 ```
 
